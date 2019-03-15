@@ -65,4 +65,21 @@ void setup(){
  pinMode(reset, OUTPUT);
  digitalWrite(reset, LOW);
  digitalWrite(strobe, HIGH);
-}
+
+ //Lighting setup
+ 
+ delay( 3000 );
+ FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+
+//Clears LEDS
+ for(int i = 0; i < NUM_LEDS; i++)
+  leds[i] = CRGB(0, 0, 0);
+ FastLED.show();
+
+  //Serial and input setup
+  Serial.begin(115200);
+  lcd.begin(16, 2);
+  lcd.clear();
+  Serial.println("\nListening...");
+ }
+ 
