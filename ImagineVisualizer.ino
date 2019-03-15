@@ -58,6 +58,11 @@ int wheel_speed = 2;
  */
 void setup(){
 
- 
-
+ //Setup for spectrum shield
+ pinMode(audio1, INPUT); //This line of code takes in audio1 as a input
+ pinMode(audio2, INPUT): //This line of code takes in audio2 as a input
+ pinMode(strobe, OUTPUT); //This takes the strobe int and outputs it to the light
+ pinMode(reset, OUTPUT);
+ digitalWrite(reset, LOW);
+ digitalWrite(strobe, HIGH);
 }
