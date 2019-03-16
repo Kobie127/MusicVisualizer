@@ -108,4 +108,11 @@ void setup(){
  }
 
 
+ void single(){
+  for(int i = NUM_LEDS -  1; i >= midway; i--){
+    
+  }
+ }
+
+
  
