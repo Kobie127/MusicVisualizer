@@ -51,6 +51,7 @@ long react = 0; //The number of led's being lit at once.
 long post_react = 0; //This is the old spike conversion
 
 int wheel_speed = 2;
+
 /**
  * This is the void setup.  What the setup is for is to initialize the 
  * functionality of the spectrum shield and the lcd screen to control the
@@ -83,6 +84,11 @@ void setup(){
   Serial.println("\nListening...");
  }
 
+/**
+ * This function simulates the scroll.  What this does is
+ * takes in the int pos and generates a color based 
+ * on virtual wheel.
+ */
  CRGB Scroll(int pos){
   CRGB color (0,0,0);
   if(pos < 85){
