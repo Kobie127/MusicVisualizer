@@ -82,4 +82,17 @@ void setup(){
   lcd.clear();
   Serial.println("\nListening...");
  }
+
+ CRGB Scroll(int pos){
+  CRGB color (0,0,0);
+  if(pos < 85){
+    color.g = 0;
+    color.r = ((float)pos / 85.0f) * 255.0f;
+    color.b = 255 - color.r;
+  }else if (pos < 170){
+    color.g = ((float)(pos - 85) / 85.0f) * 255.0f;
+  }
+ }
+
+
  
