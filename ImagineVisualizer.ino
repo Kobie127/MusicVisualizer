@@ -114,10 +114,11 @@ void setup(){
   for(int i = NUM_LEDS -  1; i >= midway; i--){
     if(i > react){
         leds[i] = CRGB(0, 0 ,0);
-    }else
+    }else{
         leds[i] = Scroll((i * 256 / 50 + k) % 256);
   }
   FastLED.show();
+ }
  }
 
 
