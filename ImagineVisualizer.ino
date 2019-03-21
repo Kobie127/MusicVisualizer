@@ -125,6 +125,23 @@ void setup(){
  }
  }
 
+ void double(){
+
+  for(int i = NUM_LEDS - 1; i >= midway; i--){
+    if(i > react + midway){
+      leds[i[ = CRGB(0 ,0 ,0);
+       leds[midway - react] = CRGB(0 ,0 ,0);
+    }else{
+      leds[i] = Scroll((i * 256 / 50 + k) % 256);
+      leds[(midway - i) + midway] = Scroll((i * 256 / 50 + k) % 256);
+    }
+  }
+  
+ }
+
+
+ 
+
 
 
  
