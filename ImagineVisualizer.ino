@@ -123,6 +123,9 @@ void setup(){
  }
  }
 
+/**
+ * This function is a mirrored visualization.
+ */
  void double(){
   for(int i = NUM_LEDS - 1; i >= midway; i--){
     if(i > react + midway){
@@ -135,14 +138,24 @@ void setup(){
   }
  }
 
+/**
+ * This function reads 7 band equalizers through the
+ * SprakFun Spectrum Shield.  Reading the 7 bands 
+ * will return the strengths of the audio at seven
+ * points.  The seven points it reads it at is -63Hz, 
+ * 160Hz, 400Hz, 1kHz, 2.5 kHz, 6.25 kHz then 16kHz 
+ * then back to 63 Hz.
+ * This code was referenced from 
+ * https://tronixstuff.com/2013/01/31/tutorial-arduino-and-the-msgeq7-spectrum-analyzer/
+ */
  void readMSGEQ7(){
   digitalWrite(res, HIGH);
   digitalWrite(res, LOW);
   for(band = 0; band < 7; band++){
-    digitalWrite(strobe, LOW);
+    digitalWrite(strobe, LOW);//Strobe pin on the shield - kicks the IC up to the next band
     delayMicroseconds(30);
-    left[band] = analogRead(0);
-    right[band] = analogRead(1);
+    left[band] = analogRead(0);//Store left band reading 
+    right[band] = analogRead(1);//And it to the right
     digitalWrite(strobe, HIGH);
   }
  }
