@@ -1,5 +1,3 @@
-
-
 #include <FastLED.h>
 #include <LiquidCrystal.h> //Includes the LCD library
 #include <Arduino.h>
@@ -136,3 +134,16 @@ void setup(){
     }
   }
  }
+
+ void readMSGEQ7(){
+  digitalWrite(res, HIGH);
+  digitalWrite(res, LOW);
+  for(band = 0; band < 7; band++){
+    digitalWrite(strobe, LOW);
+    delayMicroseconds(30);
+    left[band] = analogRead(0);
+    right[band] = analogRead(1);
+    digitalWrite(strobe, HIGH);
+  }
+ }
+ 
