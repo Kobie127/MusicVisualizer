@@ -109,7 +109,11 @@ void setup(){
   return color;
  }
 
-
+/**
+ * This function is meant to get and set the color of the LED.
+ * This function has been modified to send the waves of colors out
+ * from the first LED.
+ */
  void single(){
   for(int i = NUM_LEDS -  1; i >= midway; i--){
     if(i > react){
