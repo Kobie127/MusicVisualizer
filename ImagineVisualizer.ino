@@ -159,4 +159,22 @@ void setup(){
     digitalWrite(strobe, HIGH);
   }
  }
+
+ void convertSingle(){
+   if (left[freq] > right[freq])
+    audio_input = left[freq];
+  else
+    audio_input = right[freq];
+
+  if (audio_input > 80)
+  {
+    pre_react = ((long)NUM_LEDS  * (long)audio_input) / 1023L;
+    if(pre_react > react)
+      react = pre_react;
+
+    Serial.print(audio_input);
+    Serial.print("  -> ");
+    Serial.println(pre_react);
+  }
+
  
