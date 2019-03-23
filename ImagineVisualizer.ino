@@ -161,6 +161,11 @@ void setup(){
   }
  }
 
+/**
+ * This function will take the lights and convert it
+ * to a signle frequency.  This is one of the modes
+ * that could possibly be used.
+ */
  void convertSingle()
  {
    if (left[freq] > right[freq])
@@ -181,6 +186,11 @@ void setup(){
    }
  }
 
+/**
+ * This function will take the lights and convert it
+ * to a double frequency.  This is one of the modes
+ * that could possibly be used.
+ */
  void convertDouble()
  {
    if(left[freq] > right[freq])
@@ -201,6 +211,16 @@ void setup(){
    }
  }
 
+/**
+ * This function will read the 7 band equalizer using the 
+ * readMSGEQ7 function and will then use the function
+ * to convert it to single it then calls the singleR
+ * function which will apply the color.  It also 
+ * holds the functionality for keeping track of 
+ * the speed of the color wheel and it can also 
+ * reset the color wheel.  It also handles 
+ * the functionality of removing the led's.
+ */
  void singleLevel(){
    readMSGEQ7(); //This will read the 7 bands
    convertSingle();//This will convert it to a single level
@@ -212,7 +232,7 @@ void setup(){
      k = 255;
    }
 
-   //This will remove  the led's.
+   //This will remove the led's.
    decay_check++;
    if(decay_check > decay){
      decay_check = 0;
@@ -222,6 +242,16 @@ void setup(){
    }
  }
 
+/**
+ * This function will read the 7 band equalizer using the 
+ * readMSGEQ7 function and will then use the function
+ * to convert it to double it then calls the doubleR
+ * function which will apply the color.  It also 
+ * holds the functionality for keeping track of 
+ * the speed of the color wheel and it can also 
+ * reset the color wheel.  It also handles 
+ * the functionality of removing the led's.
+ */
  void doubleLevel(){
    readMSGEQ7();
    convertDouble();
