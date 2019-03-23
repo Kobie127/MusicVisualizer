@@ -4,7 +4,7 @@
 
 
 /**
- * This code is for the Led music visualizer that will be put 
+ * This code is for the Led music visualizer that will be put
  * into the smart car that is being developed by the Computer
  * Sceince House @RIT.  This arduino setup will visualize the
  * music by the beat.  It will also have the feature to adjust
@@ -53,7 +53,7 @@ long post_react = 0; //This is the old spike conversion
 int wheel_speed = 2;
 
 /**
- * This is the void setup.  What the setup is for is to initialize the 
+ * This is the void setup.  What the setup is for is to initialize the
  * functionality of the spectrum shield and the lcd screen to control the
  * brightness and sensitivity of the lights.
  */
@@ -68,7 +68,7 @@ void setup(){
  digitalWrite(strobe, HIGH);
 
  //Lighting setup
- 
+
  delay( 3000 );
  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
 
@@ -86,14 +86,14 @@ void setup(){
 
 /**
  * This function simulates the scroll.  What this does is
- * takes in the int pos and generates a color based 
- * on virtual wheel.  
+ * takes in the int pos and generates a color based
+ * on virtual wheel.
  */
  CRGB Scroll(int pos){
   CRGB color (0,0,0);
   if(pos < 85){ //This checks to see if the rgb scale is below 85
     color.g = 0; //This will set it to 0
-    color.r = ((float)pos / 85.0f) * 255.0f; 
+    color.r = ((float)pos / 85.0f) * 255.0f;
     color.b = 255 - color.r;
   }else if (pos < 170){
     color.g = ((float)(pos - 85) / 85.0f) * 255.0f;
@@ -140,12 +140,12 @@ void setup(){
 
 /**
  * This function reads 7 band equalizers through the
- * SprakFun Spectrum Shield.  Reading the 7 bands 
+ * SprakFun Spectrum Shield.  Reading the 7 bands
  * will return the strengths of the audio at seven
- * points.  The seven points it reads it at is -63Hz, 
- * 160Hz, 400Hz, 1kHz, 2.5 kHz, 6.25 kHz then 16kHz 
+ * points.  The seven points it reads it at is -63Hz,
+ * 160Hz, 400Hz, 1kHz, 2.5 kHz, 6.25 kHz then 16kHz
  * then back to 63 Hz.
- * This code was referenced from 
+ * This code was referenced from
  * https://tronixstuff.com/2013/01/31/tutorial-arduino-and-the-msgeq7-spectrum-analyzer/
  */
  void readMSGEQ7(){
@@ -154,7 +154,7 @@ void setup(){
   for(band = 0; band < 7; band++){
     digitalWrite(strobe, LOW);//Strobe pin on the shield - kicks the IC up to the next band
     delayMicroseconds(30);
-    left[band] = analogRead(0);//Store left band reading 
+    left[band] = analogRead(0);//Store left band reading
     right[band] = analogRead(1);//And it to the right
     digitalWrite(strobe, HIGH);
   }
@@ -199,5 +199,27 @@ void setup(){
      Serial.println(pre_react);
    }
  }
+
+ void singleLevel(){
+   readMSGEQ7(); //This will read the 7 bands
+   convertSingle();//This will convert it to a single level
+   single(); //This will apply the color
+
+   k = k - wheel_speed;//This is the speed of the color wheel
+
+   if(k < 0){ //This will reset the color wheel
+     k = 255;
+   }
+
+   //This will remove  the led's.
+   decay_check++;
+   if(decay_check > decay){
+     decay_check = 0;
+     if(react > 0){
+       react--;
+     }
+   }
+ }
    
    
+ 
