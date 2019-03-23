@@ -112,7 +112,7 @@ void setup(){
  * This function has been modified to send the waves of colors out
  * from the first LED.
  */
- void single(){
+ void singleR(){
   for(int i = NUM_LEDS -  1; i >= midway; i--){
     if(i > react){
         leds[i] = CRGB(0, 0 ,0);
@@ -126,7 +126,7 @@ void setup(){
 /**
  * This function is a mirrored visualization.
  */
- void double(){
+ void doubleR(){
   for(int i = NUM_LEDS - 1; i >= midway; i--){
     if(i > react + midway){
       leds[i[ = CRGB(0 ,0 ,0);
@@ -136,6 +136,7 @@ void setup(){
       leds[(midway - i) + midway] = Scroll((i * 256 / 50 + k) % 256);
     }
   }
+  FastLED.show();
  }
 
 /**
@@ -203,7 +204,7 @@ void setup(){
  void singleLevel(){
    readMSGEQ7(); //This will read the 7 bands
    convertSingle();//This will convert it to a single level
-   single(); //This will apply the color
+   singleR(); //This will apply the color
 
    k = k - wheel_speed;//This is the speed of the color wheel
 
@@ -220,6 +221,30 @@ void setup(){
      }
    }
  }
+
+ void doubleLevel(){
+   readMSGEQ7();
+   convertDouble();
+   doubleR();
+
+   k = k - wheel_speed;//This is the speed of the color wheel
+
+   if(k < 0){ //This will reset the color wheel
+     k = 255;
+   }
+
+   //This will remove  the led's.
+   decay_check++;
+   if(decay_check > decay){
+     decay_check = 0;
+     if(react > 0){
+       react--;
+     }
+   }
    
+ }
+
+ void loop(){
+   //
+ }
    
- 
