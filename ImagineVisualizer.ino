@@ -108,13 +108,18 @@ void setup(){
     u8x8.begin();
     u8x8.setFont(u8x8_font_chroma48medium8_r);  
     pinMode(upB, INPUT_PULLUP);
-    pinMode(downN, INPUT_PULLUP);
+    pinMode(downN, INPUT_PULLUP); 
     pinMode(selectB, INPUT_PULLUP);
     updateMenu();
     
  }
 
- 
+
+ void updateMenu(){
+  for (int i = 0; i < NUM_LEDS; i++)
+    leds[i] = CRGB(0, 0, 0);
+  FastLED.show();
+ }
 
   
  
