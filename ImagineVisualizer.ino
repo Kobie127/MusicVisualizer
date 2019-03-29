@@ -1,6 +1,12 @@
 #include <FastLED.h>
 #include <LiquidCrystal.h> //Includes the LCD library
 #include <Arduino.h>
+#include <Wire.h>
+#include <U8x8lib.h> //This library is used for setting fonts on the LCD screen.
+
+#ifdef U8X8_HAVE_HW_SPI
+#include <SPI.h>
+#endif
 
 
 /**
@@ -26,6 +32,14 @@
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+//Screen for button setup variables
+U8X8_SSD1306_128X64_NONAME_SW_I2C u8x8(/* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);   // OLEDs without Reset of the Display (you may have to edit the address of your display)
+int upB = 12;
+int downB = 11;
+int selectB = 3;
+int menu = 1;
+
 
 #define UPDATES_PER_SECOND 100
 
@@ -82,6 +96,11 @@ void setup(){
   lcd.begin(16, 2);
   lcd.clear();
   Serial.println("\nListening...");
+ }
+
+ void setupDisplay(){
+    u8x8.begin();
+    u8x8.setFont(u8x8_font_chroma48medium8_r);  
  }
 
 /**
