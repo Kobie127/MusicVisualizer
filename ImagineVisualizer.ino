@@ -98,6 +98,12 @@ void setup(){
   Serial.println("\nListening...");
  }
 
+ /**
+  * This function is to setup the lcd display screen which
+  * will hold all of the functionality to switch in between
+  * measuring the different kinds of frequencies and visualize
+  * that specific frequency that the user desires.
+  */
  void setupDisplay(){
     u8x8.begin();
     u8x8.setFont(u8x8_font_chroma48medium8_r);  
@@ -107,6 +113,11 @@ void setup(){
     updateMenu();
     
  }
+
+ 
+
+  
+ 
 
 /**
  * This function simulates the scroll.  What this does is
