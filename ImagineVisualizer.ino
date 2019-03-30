@@ -230,7 +230,7 @@ void setup(){
       u8x8.drawString(0,5, ">2.5   kHz");
       u8x8.drawString(0,6, "6.25   kHz");
       u8x8.drawString(0,7, "16     kHz");
-      u8x8.drawString(0,0, "-----------------");
+      u8x8.drawString(0,8, "-----------------");
       break;
     case 6:
       u8x8.drawString(0,0, "-----------------");
@@ -241,7 +241,7 @@ void setup(){
       u8x8.drawString(0,5, "2.5   kHz");
       u8x8.drawString(0,6, ">6.25   kHz");
       u8x8.drawString(0,7, "16     kHz");
-      u8x8.drawString(0,0, "-----------------");
+      u8x8.drawString(0,8, "-----------------");
       break;
     case 7:
       u8x8.drawString(0,0, "-----------------");
@@ -252,7 +252,7 @@ void setup(){
       u8x8.drawString(0,5, "2.5   kHz");
       u8x8.drawString(0,6, "6.25   kHz");
       u8x8.drawString(0,7, ">16     kHz");
-      u8x8.drawString(0,0, "-----------------");
+      u8x8.drawString(0,8, "-----------------");
       break;
     case 8:
       menu = 7;
