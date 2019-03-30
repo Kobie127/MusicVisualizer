@@ -137,8 +137,8 @@ void setup(){
       break;
     case 2:
       u8x8.drawString(0,0, "-----------------");
-      u8x8.drawString(0,1, ">63      Hz");
-      u8x8.drawString(0,2," 160     Hz");
+      u8x8.drawString(0,1, "63      Hz");
+      u8x8.drawString(0,2," >160     Hz");
       u8x8.drawString(0,3," 400     Hz");
       u8x8.drawString(0,4, "1      kHz");
       u8x8.drawString(0,5, "2.5    kHz");
@@ -148,9 +148,9 @@ void setup(){
       break;
     case 3:
       u8x8.drawString(0,0, "-----------------");
-      u8x8.drawString(0,1, ">63      Hz");
+      u8x8.drawString(0,1, "63      Hz");
       u8x8.drawString(0,2," 160     Hz");
-      u8x8.drawString(0,3," 400     Hz");
+      u8x8.drawString(0,3," >400     Hz");
       u8x8.drawString(0,4, "1      kHz");
       u8x8.drawString(0,5, "2.5    kHz");
       u8x8.drawString(0,6, "6.25   kHz");
@@ -159,14 +159,50 @@ void setup(){
       break;
     case 4:
       u8x8.drawString(0,0, "-----------------");
-      u8x8.drawString(0,1, ">63      Hz");
+      u8x8.drawString(0,1, "63      Hz");
       u8x8.drawString(0,2," 160     Hz");
       u8x8.drawString(0,3," 400     Hz");
-      u8x8.drawString(0,4, "1      kHz");
+      u8x8.drawString(0,4, ">1     kHz");
       u8x8.drawString(0,5, "2.5    kHz");
       u8x8.drawString(0,6, "6.25   kHz");
       u8x8.drawString(0,7, "16     kHz");
       u8x8.drawString(0,8,"-----------------");
+      break;
+    case 5:
+      u8x8.drawString(0,0, "-----------------");
+      u8x8.drawString(0,1, "63      Hz");
+      u8x8.drawString(0,2, "160     Hz");
+      u8x8.drawString(0,3, "400     Hz");
+      u8x8.drawString(0,4, "1      kHz");
+      u8x8.drawString(0,5, ">2.5   kHz");
+      u8x8.drawString(0,6, "6.25   kHz");
+      u8x8.drawString(0,7, "16     kHz");
+      u8x8.drawString(0,0, "-----------------");
+      break;
+    case 6:
+      u8x8.drawString(0,0, "-----------------");
+      u8x8.drawString(0,1, "63      Hz");
+      u8x8.drawString(0,2, "160     Hz");
+      u8x8.drawString(0,3, "400     Hz");
+      u8x8.drawString(0,4, "1      kHz");
+      u8x8.drawString(0,5, "2.5   kHz");
+      u8x8.drawString(0,6, ">6.25   kHz");
+      u8x8.drawString(0,7, "16     kHz");
+      u8x8.drawString(0,0, "-----------------");
+      break;
+    case 7:
+      u8x8.drawString(0,0, "-----------------");
+      u8x8.drawString(0,1, "63      Hz");
+      u8x8.drawString(0,2, "160     Hz");
+      u8x8.drawString(0,3, "400     Hz");
+      u8x8.drawString(0,4, "1      kHz");
+      u8x8.drawString(0,5, "2.5   kHz");
+      u8x8.drawString(0,6, "6.25   kHz");
+      u8x8.drawString(0,7, ">16     kHz");
+      u8x8.drawString(0,0, "-----------------");
+      break;
+    case 8:
+      menu = 7;
       break;
   }
  }
