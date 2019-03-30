@@ -262,6 +262,32 @@ void setup(){
   freq = 6;
   break;
  }
+
+ void selectAction(){
+  switch(menu){
+    case 1:
+      select1();
+      break;
+    case 2:
+      select2();
+      break;
+    case 3:
+      select3();
+      break;
+    case 4:
+      select4();
+      break;
+    case 5:
+      select5();
+      break;
+    case 6:
+      select6();
+      break;
+    case 7:
+      select7();
+      break;
+  }
+ }
  
 
   
