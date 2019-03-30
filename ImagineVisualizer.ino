@@ -207,6 +207,63 @@ void setup(){
   }
  }
 
+ void select1(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "63 Hz");
+  freq = 0;
+  break;
+ }
+
+ void select2(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "160 Hz");
+  freq = 1;
+  break;
+ }
+
+ void select3(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "400 Hz");
+  freq = 2;
+  break;
+ }
+
+ void select4(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "1 kHz");
+  freq = 3;
+  break;
+ }
+
+ void select5(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "2.5 kHz");
+  freq = 4;
+  break;
+ }
+
+ void select6(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "6.25 kHz");
+  freq = 5;
+  break;
+ }
+
+ void select7(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "16 kHz");
+  freq = 6;
+  break;
+ }
+ 
+
   
  
 
