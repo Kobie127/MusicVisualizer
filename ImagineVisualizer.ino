@@ -142,6 +142,26 @@ void setup(){
       u8x8.drawString(0,4, "2.5    kHz");
       u8x8.drawString(0,5, "6.25"  kHz");
       u8x8.drawString(0,6, "16     kHz");
+      break;
+
+    case 3:
+      u8x8.drawString(0,0, "63      Hz");
+      u8x8.drawString(0,1, "160     Hz");
+      u8x8.drawString(0,2, ">400    Hz");
+      u8x8.drawString(0,3, "1      kHz");
+      u8x8.drawString(0,4, "2.5    kHz");
+      u8x8.drawString(0,5, "6.25   kHz");
+      u8x8.drawString(0,6, "16     kHz");
+      break;
+    case 4:
+      u8x8.drawString(0,0, "63      Hz");
+      u8x8.drawString(0,1, "160     Hz");
+      u8x8.drawString(0,2, "400     Hz");
+      u8x8.drawString(0,3, ">1     kHz");
+      u8x8.drawString(0,4, "2.5    kHz");
+      u8x8.drawString(0,5, "6.25   kHz");
+      u8x8.drawString(0,6, "16     kHz");
+      break;
   }
  }
 
