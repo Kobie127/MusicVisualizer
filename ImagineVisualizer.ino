@@ -85,6 +85,7 @@ void setup(){
 
  delay( 3000 );
  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+ FastLED.setBrightness(BIRGHTNESS);
 
 //Clears LEDS
  for(int i = 0; i < NUM_LEDS; i++)
@@ -93,8 +94,6 @@ void setup(){
 
   //Serial and input setup
   Serial.begin(115200);
-  lcd.begin(16, 2);
-  lcd.clear();
   Serial.println("\nListening...");
  }
 
@@ -110,8 +109,43 @@ void setup(){
     pinMode(upB, INPUT_PULLUP);
     pinMode(downN, INPUT_PULLUP); 
     pinMode(selectB, INPUT_PULLUP);
-    updateMenu();
-    
+    updateMenu();  
+ }
+
+ void setupFreqDisplay(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Listening....");
+
+  switch(freq){
+    case 0:
+      u8x8.drawString(0,2, "Freq is 63 Hz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 1:
+      u8x8.drawString(0,2, "Freq is 160 Hz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 2: 
+      u8x8.drawString(0,2, "Freq is 400 Hz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 3:
+      u8x8.drawString(0,2, "Freq is 1 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 4:
+      u8x8.drawString(0,2, "Freq is 2.5 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 5:
+      u8x8.drawString(0,2, "Freq is 6.25 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 6:
+      u8x8.drawString(0,2, "Freq is 16 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+  }
  }
 
 
