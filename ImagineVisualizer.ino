@@ -112,6 +112,7 @@ void setup(){
     updateMenu();  
  }
 
+
  void setupFreqDisplay(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Listening....");
@@ -324,9 +325,6 @@ void setup(){
  }
  
 
-  
- 
-
 /**
  * This function simulates the scroll.  What this does is
  * takes in the int pos and generates a color based
@@ -518,6 +516,29 @@ void setup(){
  }
 
  void loop(){
-   //
+   //signleLevel();
+   doubleLevel();
+   //delay(1);
+
+   if(!digitalRead(downB)){
+    menu++;
+    updateMenu();
+    delay(100);
+    while(!digitalRead(downB));
+   }
+
+   if(!digitalRead(upB)){
+    menu--;
+    updateMenu();
+    delay(100);
+    while(!digitalRead(upB));
+
+    if(!digitalRead(selectB)){
+      selectAction();
+      setupFreqDisplay();
+      delay(100);
+      while(!digitalRead(selectB));
+    }
+   }
  }
    
