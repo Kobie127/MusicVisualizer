@@ -43,7 +43,11 @@ int menu = 1;
 
 #define UPDATES_PER_SECOND 100
 
-//Audio input setup
+/**
+ * This is used for audio input setup 
+ * that will be used with the spectrum
+ * shield.
+ */
 int strobe = 4;
 int reset = 5;
 int audio1 = A0;
@@ -54,7 +58,11 @@ int band;
 int audio_input = 0;
 int freq = 0;
 
-//Visualizer variables used for the led's
+/**
+ * These are the variables used for the actual
+ * lights that will be used to display the 
+ * viusalization.
+ */
 int midway = NUM_LEDS / 2; //The center mark form the double level visualizer.
 int loop_max = 0;
 int k = 255; //Color wheel position otherwise known as the RGB scale.
