@@ -112,7 +112,12 @@ void setup(){
     updateMenu();  
  }
 
-
+ /**
+  * This function is to setup the lcd screen once
+  * the frequency has been selected.  It will 
+  * display the frequency selected and who it was
+  * made by.
+  */
  void setupFreqDisplay(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Listening....");
@@ -149,7 +154,12 @@ void setup(){
   }
  }
 
-
+/**
+ * This function is to update the menu that is being
+ * projected onto the lcd screen.  It has many cases
+ * which shows where the user is once the button has been 
+ * pushed on the screen.
+ */
  void updateMenu(){
   for (int i = 0; i < NUM_LEDS; i++)
     leds[i] = CRGB(0, 0, 0);
@@ -242,6 +252,10 @@ void setup(){
   }
  }
 
+/**
+ * This function is used for selecting the first
+ * frequency displayed on the screen.
+ */
  void select1(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -250,6 +264,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for selecting the second
+ * frequency displayed on the screen.
+ */
  void select2(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -258,6 +276,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for selecting the third
+ * frequency displayed on the screen.
+ */
  void select3(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -266,6 +288,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for selecting the fourth
+ * frequency displayed on the screen.
+ */
  void select4(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -274,6 +300,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for selecting the fifth
+ * frequency displayed on the screen.
+ */
  void select5(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -282,6 +312,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for selecting the sixth
+ * frequency displayed on the screen.
+ */
  void select6(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -290,6 +324,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for selecting the seventh
+ * frequency displayed on the screen.
+ */
  void select7(){
   u8x8.clear();
   u8x8.drawString(0,0, "-Frequency selected");
@@ -298,6 +336,10 @@ void setup(){
   break;
  }
 
+/**
+ * This function is used for when the user does select the certain 
+ * frequency.  It handles it with a switch statement.
+ */
  void selectAction(){
   switch(menu){
     case 1:
@@ -515,6 +557,13 @@ void setup(){
    
  }
 
+/**
+ * The loop is the main function in the program.
+ * It holds the two different modes to visualize 
+ * the music and it also holds everything needed
+ * for updating the menu whenn the user interacts
+ * with it.
+ */
  void loop(){
    //signleLevel();
    doubleLevel();
