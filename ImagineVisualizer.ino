@@ -31,7 +31,7 @@
 #define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
 
 //Screen for button setup variables
 U8X8_SSD1306_128X64_NONAME_SW_I2C u8x8(/* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);   // OLEDs without Reset of the Display (you may have to edit the address of your display)
@@ -74,36 +74,6 @@ long post_react = 0; //This is the old spike conversion
 
 int wheel_speed = 2;
 
-/**
- * This is the void setup.  What the setup is for is to initialize the
- * functionality of the spectrum shield and the lcd screen to control the
- * brightness and sensitivity of the lights.
- */
-void setup(){
-
- //Setup for spectrum shield
- pinMode(audio1, INPUT); //This line of code takes in audio1 as a input
- pinMode(audio2, INPUT): //This line of code takes in audio2 as a input
- pinMode(strobe, OUTPUT); //This takes the strobe int and outputs it to the light
- pinMode(reset, OUTPUT);
- digitalWrite(reset, LOW);
- digitalWrite(strobe, HIGH);
-
- //Lighting setup
-
- delay( 3000 );
- FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
- FastLED.setBrightness(BIRGHTNESS);
-
-//Clears LEDS
- for(int i = 0; i < NUM_LEDS; i++)
-  leds[i] = CRGB(0, 0, 0);
- FastLED.show();
-
-  //Serial and input setup
-  Serial.begin(115200);
-  Serial.println("\nListening...");
- }
 
  /**
   * This function is to setup the lcd display screen which
@@ -124,7 +94,11 @@ void setup(){
   * This function is to setup the lcd screen once
   * the frequency has been selected.  It will 
   * display the frequency selected and who it was
-  * made by.
+  * made by.  In addition to setting up the 
+  * frequency display, it also holds the setup
+  * for the spectrum shield and how it will take in
+  * input from a 3.5mm jack.  It also uses the 
+  * FastLED library and it's function calls.
   */
  void setupFreqDisplay(){
   u8x8.clear();
@@ -160,6 +134,28 @@ void setup(){
       u8x8.drawString(0,7, "Made by Kobie Arndt");
       break;
   }
+   //Setup for spectrum shield
+ pinMode(audio1, INPUT); //This line of code takes in audio1 as a input
+ pinMode(audio2, INPUT): //This line of code takes in audio2 as a input
+ pinMode(strobe, OUTPUT); //This takes the strobe int and outputs it to the light
+ pinMode(reset, OUTPUT);
+ digitalWrite(reset, LOW);
+ digitalWrite(strobe, HIGH);
+
+ //Lighting setup
+
+ delay( 3000 );
+ FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+ FastLED.setBrightness(BIRGHTNESS);
+
+//Clears LEDS
+ for(int i = 0; i < NUM_LEDS; i++)
+  leds[i] = CRGB(0, 0, 0);
+ FastLED.show();
+
+  //Serial and input setup
+  Serial.begin(115200);
+  Serial.println("\nListening...");
  }
 
 /**
@@ -404,28 +400,27 @@ void setup(){
  * from the first LED.
  */
  void singleR(){
-  for(int i = NUM_LEDS -  1; i >= midway; i--){
-    if(i > react){
-        leds[i] = CRGB(0, 0 ,0);
-    }else{
-        leds[i] = Scroll((i * 256 / 50 + k) % 256);
+  for(int i = NUM_LEDS - 1; i >= 0; i--) {
+    if (i < react)
+      leds[i] = Scroll((i * 256 / 50 + k) % 256);
+    else
+      leds[i] = CRGB(0, 0, 0);      
   }
-  FastLED.show();
- }
+  FastLED.show(); 
  }
 
 /**
  * This function is a mirrored visualization.
  */
  void doubleR(){
-  for(int i = NUM_LEDS - 1; i >= midway; i--){
-    if(i > react + midway){
-      leds[i] = CRGB(0 ,0 ,0);
-       leds[midway - react] = CRGB(0 ,0 ,0);
-    }else{
+ for(int i = NUM_LEDS - 1; i >= midway; i--) {
+    if (i < react + midway) {
       leds[i] = Scroll((i * 256 / 50 + k) % 256);
       leds[(midway - i) + midway] = Scroll((i * 256 / 50 + k) % 256);
     }
+    else
+      leds[i] = CRGB(0, 0, 0);
+      leds[midway - react] = CRGB(0, 0, 0);
   }
   FastLED.show();
  }
