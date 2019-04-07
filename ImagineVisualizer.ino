@@ -10,7 +10,7 @@
 
 
 /**
- * This code is for the Led music visualizer that will be put
+ * This code is for the LED music visualizer that will be put
  * into the smart car that is being developed by the Computer
  * Sceince House @RIT.  This arduino setup will visualize the
  * music by the beat.  It will also have the feature to adjust
@@ -25,8 +25,8 @@
  //This is the LED lighting setup.
 
 // LED LIGHTING SETUP
-#define LED_PIN     6
-#define NUM_LEDS    100 // 250
+#define LED_PIN     13  
+#define NUM_LEDS    5  // 250
 #define BRIGHTNESS  64
 #define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
@@ -34,7 +34,7 @@ CRGB leds[NUM_LEDS];
 
 
 //Screen for button setup variables
-U8X8_SSD1306_128X64_NONAME_SW_I2C u8x8(/* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);   // OLEDs without Reset of the Display (you may have to edit the address of your display)
+U8X8_SSD1306_128X64_NONAME_SW_I2C u8x8(/* clock=*/ SCL,  /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);   // OLEDs without Reset of the Display (you may have to edit the address of your display)
 int upB = 12;
 int downB = 11;
 int selectB = 3;
@@ -64,7 +64,7 @@ int freq = 0;
  * viusalization.
  */
 int midway = NUM_LEDS / 2; //The center mark form the double level visualizer.
-int loop_max = 0;
+int loop_max = 2;
 int k = 255; //Color wheel position otherwise known as the RGB scale.
 int decay = 0; //This will keep track of the milliseconds before a light decays.
 int decay_check = 0;
@@ -81,82 +81,15 @@ int wheel_speed = 2;
   * measuring the different kinds of frequencies and visualize
   * that specific frequency that the user desires.
   */
- void setupDisplay(){
+ void setup(){
     u8x8.begin();
     u8x8.setFont(u8x8_font_chroma48medium8_r);  
     pinMode(upB, INPUT_PULLUP);
-    pinMode(downN, INPUT_PULLUP); 
+    pinMode(downB, INPUT_PULLUP); 
     pinMode(selectB, INPUT_PULLUP);
     updateMenu();  
  }
 
- /**
-  * This function is to setup the lcd screen once
-  * the frequency has been selected.  It will 
-  * display the frequency selected and who it was
-  * made by.  In addition to setting up the 
-  * frequency display, it also holds the setup
-  * for the spectrum shield and how it will take in
-  * input from a 3.5mm jack.  It also uses the 
-  * FastLED library and it's function calls.
-  */
- void setupFreqDisplay(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Listening....");
-
-  switch(freq){
-    case 0:
-      u8x8.drawString(0,2, "Freq is 63 Hz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-    case 1:
-      u8x8.drawString(0,2, "Freq is 160 Hz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-    case 2: 
-      u8x8.drawString(0,2, "Freq is 400 Hz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-    case 3:
-      u8x8.drawString(0,2, "Freq is 1 kHz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-    case 4:
-      u8x8.drawString(0,2, "Freq is 2.5 kHz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-    case 5:
-      u8x8.drawString(0,2, "Freq is 6.25 kHz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-    case 6:
-      u8x8.drawString(0,2, "Freq is 16 kHz");
-      u8x8.drawString(0,7, "Made by Kobie Arndt");
-      break;
-  }
-   //Setup for spectrum shield
- pinMode(audio1, INPUT); //This line of code takes in audio1 as a input
- pinMode(audio2, INPUT): //This line of code takes in audio2 as a input
- pinMode(strobe, OUTPUT); //This takes the strobe int and outputs it to the light
- pinMode(reset, OUTPUT);
- digitalWrite(reset, LOW);
- digitalWrite(strobe, HIGH);
-
- //Lighting setup
-
- delay( 3000 );
- FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
- FastLED.setBrightness(BIRGHTNESS);
-
-//Clears LEDS
- for(int i = 0; i < NUM_LEDS; i++)
-  leds[i] = CRGB(0, 0, 0);
- FastLED.show();
-
-  //Serial and input setup
-  Serial.begin(115200);
-  Serial.println("\nListening...");
- }
 
 /**
  * This function is to update the menu that is being
@@ -256,91 +189,7 @@ int wheel_speed = 2;
   }
  }
 
-/**
- * This function is used for selecting the first
- * frequency displayed on the screen.
- */
- void select1(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "63 Hz");
-  freq = 0;
-  break;
- }
-
-/**
- * This function is used for selecting the second
- * frequency displayed on the screen.
- */
- void select2(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "160 Hz");
-  freq = 1;
-  break;
- }
-
-/**
- * This function is used for selecting the third
- * frequency displayed on the screen.
- */
- void select3(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "400 Hz");
-  freq = 2;
-  break;
- }
-
-/**
- * This function is used for selecting the fourth
- * frequency displayed on the screen.
- */
- void select4(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "1 kHz");
-  freq = 3;
-  break;
- }
-
-/**
- * This function is used for selecting the fifth
- * frequency displayed on the screen.
- */
- void select5(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "2.5 kHz");
-  freq = 4;
-  break;
- }
-
-/**
- * This function is used for selecting the sixth
- * frequency displayed on the screen.
- */
- void select6(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "6.25 kHz");
-  freq = 5;
-  break;
- }
-
-/**
- * This function is used for selecting the seventh
- * frequency displayed on the screen.
- */
- void select7(){
-  u8x8.clear();
-  u8x8.drawString(0,0, "-Frequency selected");
-  u8x8.drawString(0,1, "16 kHz");
-  freq = 6;
-  break;
- }
-
-/**
+ /**
  * This function is used for when the user does select the certain 
  * frequency.  It handles it with a switch statement.
  */
@@ -370,6 +219,161 @@ int wheel_speed = 2;
   }
  }
  
+
+/**
+ * This function is used for selecting the first
+ * frequency displayed on the screen.
+ */
+ void select1(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "63 Hz");
+  freq = 0;
+  delay(1000);
+ }
+
+/**
+ * This function is used for selecting the second
+ * frequency displayed on the screen.
+ */
+ void select2(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "160 Hz");
+  freq = 1;
+  delay(1000);
+ }
+
+/**
+ * This function is used for selecting the third
+ * frequency displayed on the screen.
+ */
+ void select3(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "400 Hz");
+  freq = 2;
+  delay(1000);
+ }
+
+/**
+ * This function is used for selecting the fourth
+ * frequency displayed on the screen.
+ */
+ void select4(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "1 kHz");
+  freq = 3;
+  delay(1000);
+ }
+
+/**
+ * This function is used for selecting the fifth
+ * frequency displayed on the screen.
+ */
+ void select5(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "2.5 kHz");
+  freq = 4;
+  delay(1000);
+ }
+
+/**
+ * This function is used for selecting the sixth
+ * frequency displayed on the screen.
+ */
+ void select6(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "6.25 kHz");
+  freq = 5;
+  delay(1000);
+ }
+
+/**
+ * This function is used for selecting the seventh
+ * frequency displayed on the screen.
+ */
+ void select7(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Frequency selected");
+  u8x8.drawString(0,1, "16 kHz");
+  freq = 6;
+  delay(1000);
+ }
+
+  /**
+  * This function is to setup the lcd screen once
+  * the frequency has been selected.  It will 
+  * display the frequency selected and who it was
+  * made by.  In addition to setting up the 
+  * frequency display, it also holds the setup
+  * for the spectrum shield and how it will take in
+  * input from a 3.5mm jack.  It also uses the 
+  * FastLED library and it's function calls.
+  */
+ void setupFreqDisplay(){
+  u8x8.clear();
+  u8x8.drawString(0,0, "-Listening....");
+
+  switch(freq){
+    case 0:
+      u8x8.drawString(0,2, "Freq is 63 Hz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 1:
+      u8x8.drawString(0,2, "Freq is 160 Hz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 2: 
+      u8x8.drawString(0,2, "Freq is 400 Hz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 3:
+      u8x8.drawString(0,2, "Freq is 1 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 4:
+      u8x8.drawString(0,2, "Freq is 2.5 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 5:
+      u8x8.drawString(0,2, "Freq is 6.25 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+    case 6:
+      u8x8.drawString(0,2, "Freq is 16 kHz");
+      u8x8.drawString(0,7, "Made by Kobie Arndt");
+      break;
+  }
+   //Setup for spectrum shield
+ pinMode(audio1, INPUT); //This line of code takes in audio1 as a input
+ pinMode(audio2, INPUT); //This line of code takes in audio2 as a input
+ pinMode(strobe, OUTPUT); //This takes the strobe int and outputs it to the light
+ pinMode(reset, OUTPUT);
+ digitalWrite(reset, LOW);
+ digitalWrite(strobe, HIGH);
+
+ //Lighting setup
+ 
+  delay( 3000 ); // power-up safety delay
+  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
+  FastLED.setBrightness(  BRIGHTNESS );
+
+  // Clear leds
+  for (int i = 0; i < NUM_LEDS; i++)
+    leds[i] = CRGB(0, 0, 0);
+  FastLED.show();
+
+  // Serial and input setup
+  Serial.begin(115200);
+  Serial.println("\nListening...");
+}
+
+
+
 
 /**
  * This function simulates the scroll.  What this does is
@@ -436,8 +440,8 @@ int wheel_speed = 2;
  * https://tronixstuff.com/2013/01/31/tutorial-arduino-and-the-msgeq7-spectrum-analyzer/
  */
  void readMSGEQ7(){
-  digitalWrite(res, HIGH);
-  digitalWrite(res, LOW);
+  digitalWrite(reset, HIGH);
+  digitalWrite(reset, LOW);
   for(band = 0; band < 7; band++){
     digitalWrite(strobe, LOW);//Strobe pin on the shield - kicks the IC up to the next band
     delayMicroseconds(30);
@@ -514,19 +518,18 @@ int wheel_speed = 2;
 
    k = k - wheel_speed;//This is the speed of the color wheel
 
-   if(k < 0){ //This will reset the color wheel
-     k = 255;
-   }
+if (k < 0) // Reset color wheel
+    k = 255;
 
-   //This will remove the led's.
-   decay_check++;
-   if(decay_check > decay){
-     decay_check = 0;
-     if(react > 0){
-       react--;
-     }
-   }
- }
+  // REMOVE LEDs
+  decay_check++;
+  if (decay_check > decay)
+  {
+    decay_check = 0;
+    if (react > 0)
+      react--;
+  }
+}
 
 /**
  * This function will read the 7 band equalizer using the 
@@ -540,25 +543,23 @@ int wheel_speed = 2;
  */
  void doubleLevel(){
    readMSGEQ7();
-   convertDouble();
-   doubleR();
+  convertDouble();
+  doubleR();
 
-   k = k - wheel_speed;//This is the speed of the color wheel
+  k = k - wheel_speed; // Speed of the color
+  if (k < 0) // Reset color wheel
+    k = 255;
 
-   if(k < 0){ //This will reset the color wheel
-     k = 255;
-   }
+  // Remove leds
+  decay_check++;
+  if (decay_check > decay)
+  {
+    decay_check = 0;
+    if (react > 0)
+      react--;
+  }
+}
 
-   //This will remove  the led's.
-   decay_check++;
-   if(decay_check > decay){
-     decay_check = 0;
-     if(react > 0){
-       react--;
-     }
-   }
-   
- }
 
 /**
  * The loop is the main function in the program.
