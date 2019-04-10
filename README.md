@@ -5,6 +5,7 @@ The user can the select what frequency they would like to listen to using the UI
 for a oled screen that is wired to the board.  The user can then use one of the three buttons
 that are built into the board to select it and the visualizer will recognize it and visualize 
 it accordingly.
+
 ##Parts needed
 1. Arduino Uno Board
 2. SparkFun Spectrum Shield
