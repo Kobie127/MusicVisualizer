@@ -26,9 +26,9 @@
 
 // LED LIGHTING SETUP
 #define LED_PIN     13
-#define NUM_LEDS    5  // 250
+#define NUM_LEDS    144  // 250
 #define BRIGHTNESS  64
-#define LED_TYPE    WS2811
+#define LED_TYPE    WS2812
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
 
@@ -429,7 +429,7 @@ void doubleR() {
     }
     else
       leds[i] = CRGB(0, 0, 0);
-    leds[midway - react] = CRGB(0, 0, 0);
+      leds[midway - react] = CRGB(0, 0, 0);
   }
   FastLED.show();
 }
@@ -450,8 +450,8 @@ void readMSGEQ7() {
   for (band = 0; band < 7; band++) {
     digitalWrite(strobe, LOW);//Strobe pin on the shield - kicks the IC up to the next band
     delayMicroseconds(30);
-    left[band] = analogRead(0);//Store left band reading
-    right[band] = analogRead(1);//And it to the right
+    left[band] = analogRead(audio1);//Store left band reading
+    right[band] = analogRead(audio2);//And it to the right
     digitalWrite(strobe, HIGH);
   }
 }
