@@ -25,10 +25,10 @@
 //This is the LED lighting setup.
 
 // LED LIGHTING SETUP
-#define LED_PIN     13
+#define LED_PIN     5
 #define NUM_LEDS    144  // 250
-#define BRIGHTNESS  64
-#define LED_TYPE    WS2812
+#define BRIGHTNESS  32
+#define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
 
@@ -371,10 +371,10 @@ void setupFreqDisplay() {
    * and if they do, it sends them back to the updateMenu function
    */
    //Try for later when lights are working
-//  if (downB) {
-//    u8x8.clear();
-//    updateMenu();
-//  }
+  if (downB) {
+    u8x8.clear();
+    updateMenu();
+  }
 }
 
 
@@ -574,7 +574,7 @@ void doubleLevel() {
    with it.
 */
 void loop() {
-  //signleLevel();
+  //singleLevel();
   doubleLevel();
   //delay(1);
 
